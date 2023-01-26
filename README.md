@@ -20,4 +20,4 @@ This project is made for people that wants to see the 5 day forecast inadvance. 
 N/A
 
 ## Deployed link
-https://rlee7029.github.io/password/
+https://rlee7029.github.io/module6-weather-dashboard/
