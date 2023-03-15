@@ -1,6 +1,6 @@
 # weather
 
-![site](./assets/img/IMG1.JPEG)
+![site](./assets/img/Img2.jpeg)
 
 ## Techonlogies Used
 During this project. I used the following techonlogies 
