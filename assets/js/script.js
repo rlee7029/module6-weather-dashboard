@@ -7,7 +7,7 @@ let currentCity = $("#current-city");
 let currentTemperature = $("#temperature");
 let currentHumidty= $("#humidity");
 let currentWSpeed=$("#wind-speed");
-let sCity=[];
+
 
 
 let APIKey="78dd7399d393d2434ca694be6dd8192b";
@@ -21,55 +21,31 @@ function displayWeather(event){
 }
 
 function currentWeather(city){
-
     const queryURL= "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&APPID=" + APIKey;
     $.ajax({
         url:queryURL,
         method:"GET",
     }).then(function(response){
         console.log(response);
-    
-  
         const tempF = (response.main.temp - 273.15) * 1.80 + 32;
         $(currentTemperature).html((tempF).toFixed(2)+"&#8457");
         $(currentHumidty).html(response.main.humidity+"%");
         const ws=response.wind.speed;
         const windsmph=(ws*2.237).toFixed(1);
         $(currentWSpeed).html(windsmph+"MPH");
-        UVIndex(response.coord.lon,response.coord.lat);
         forecast(response.id);
         if(response.cod==0){
             sCity=JSON.parse(localStorage.getItem("cityname"));
             console.log(sCity);
-            if (sCity==null){
-                sCity=[];
-                sCity.push(city.toUpperCase()
-                );
-                localStorage.setItem("cityname",JSON.stringify(sCity));
-                addToList(city);
-            }
-            else {
-                if(find(city)>0){
-                    sCity.push(city.toUpperCase());
-                    localStorage.setItem("cityname",JSON.stringify(sCity));
-                    addToList(city);
-                }
-            }
         }
-
     });
 }
-function UVIndex(ln,lt){
-  
-    const uvqURL="https://api.openweathermap.org/data/2.5/uvi?appid="+ APIKey+"&lat="+lt+"&lon="+ln;
-    $.ajax({
-            url:uvqURL,
-            method:"GET"
-            }).then(function(response){
-                $(currentUvindex).html(response.value);
-            });
-}
-    
+
+
+function index(ln,lt){
+   const uvqURL="https://api.openweathermap.org/data/2.5/uvi?appid="+ APIKey+"&lat="+lt+"&lon="+ln;
+    }
+
 
 function forecast(cityid){
     const dayover= false;
@@ -89,7 +65,6 @@ function forecast(cityid){
             $("#5DaysTemp"+i).html(tempF+"&#8457");
             $("#5DaysHumidity"+i).html(humidity+"%");
         }
-        
     });
 }
 
